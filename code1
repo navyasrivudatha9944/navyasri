@@ -1,0 +1,160 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="pack.Dbconnection"%>
+<%@page import="java.sql.Connection"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+.myclass {display:none;}
+</style>
+<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript"></script>
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(odd) {background-color: #00FFFF;}
+tr:nth-child(even) {background-color: #D0D3D4;}
+</style>
+<script>
+    function al(){
+        if(confirm("Are sure want to delete this?")){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+</script>
+</head>
+
+<body>
+
+
+<div class="many"> 
+  
+ 
+  <div class="super">
+    <div class="header-container">
+     <div class="title">   <p style="font-size: 25px;color: #ffffff">password sniffing <div class="tcolor"><font size="3"><b>southeast missouri state university</b></font></div></p></div>
+      <div class="logo"> <a href="#"></a> </div>
+      <div class="toll-free">
+        <p></p>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+
+ <header>
+    <div class="menubar">
+     <ul>
+          
+         <li><a href="activities.jsp">Upload</a></li>
+         <li><a href="a_downloads.jsp">Download</a></li>
+        <li><a class="active" href="">Delete</a></li>
+      <li class="last"><a href="home.jsp">Logout </a></li>
+        
+      </ul>
+      </div>
+      </header>
+      <div class="clear"></div>
+    
+  <div class="container">
+    <div class="container-in">
+
+<div class="subclass" >
+ <img class="myclass" src="images/1.jpg" width="900px" height="300px">
+  <img class="myclass" src="images/2.jpg" width="900px" height="300px">
+  <img class="myclass" src="images/3.jpg" width="900px" height="300px">
+   <img class="myclass" src="images/4.jpg" width="900px" height="300px">
+    <img class="myclass" src="images/5.jpg" width="900px" height="300px">
+     <img class="myclass" src="images/6.jpg" width="900px" height="300px">
+      <img class="myclass" src="images/7.jpg" width="900px" height="300px">
+       <img class="myclass" src="images/8.jpg" width="900px" height="300px">
+        <img class="myclass" src="images/9.jpg" width="900px" height="300px">
+         <img class="myclass" src="images/10.jpg" width="900px" height="300px">
+</div>
+    
+      
+       
+        </div>
+    
+     
+      <div class="clear"></div>
+      <div class="welcome">
+          <%
+  
+
+Connection con=Dbconnection.getConn();
+Statement st=con.createStatement();
+ResultSet rt=st.executeQuery("select * from fileupload");
+
+%>
+<!--<center><h5 style="color: brown">  Welcome ! </h5></center>-->
+<center>
+    <H1 style="color: tomato">Files </H1>
+ <table border="1">
+              <tr style="background-color: #00FFFF;font-size: 15px;color: #666666">
+        <td>FILENAME</td><td>OWNER</td><td>UPLOADED TIME</td><td>DELETE</td>
+    </tr>
+    <%
+    
+while(rt.next()){
+    
+String id=rt.getString("idfile");
+%>
+    
+    <TR style="background-color: #D0D3D4 ;font-size: 15px;color: #666666">
+        <td><%=rt.getString("uploadfilename")%></td><td><%=rt.getString("owner")%></td><td><%=rt.getString("time")%></td>
+        <td><a onclick="return al()" href="delete?<%=id%>" style="color: coral">Delete</a></td>   
+    </TR>
+<%
+}
+%>
+</table>
+</center>    
+
+      <div class="clear"></div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer-in">
+      <div class="copy">
+        <p> <a href="http://www.freecsstemplates.com" target="_blank" rel="nofollow"></a></p>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </div>
+
+  
+</div>
+
+<script>
+var myIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("myclass");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  setTimeout(carousel, 2000); // Change image every 2 seconds
+}
+</script>
+</body>
+</html>
